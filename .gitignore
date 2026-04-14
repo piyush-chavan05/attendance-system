@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+venv/
+*.ino
+students.json
+attendance.json
