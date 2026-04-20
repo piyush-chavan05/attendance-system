@@ -35,10 +35,17 @@ stats_refs = create_stats_panel(main_frame)
 
 
 # ── Show student info (called when RFID scanned) ──────────
+def clear_info():
+    id_card_refs["name"].configure(text="Waiting for card...")
+    id_card_refs["roll"].configure(text="")
+    id_card_refs["time"].configure(text="")
+    id_card_refs["status"].configure(text="")
+
 
 def show_student_info(uid):
     """Look up the scanned UID, update the ID card, and save attendance."""
     students = load_students()
+    clear_info()
     student = students.get(uid)
 
     if student:
@@ -60,3 +67,5 @@ def show_student_info(uid):
         id_card_refs["time"].configure(text="—")
         id_card_refs["status"].configure(text="❌ Not Registered",
                                          text_color="#ff4444")
+
+    app.after(3000, clear_info)
